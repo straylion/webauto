@@ -1,0 +1,12 @@
+<ivy-module version="2.0">
+    <info organisation="org.apache" module="redwoodhq-ivy"/>
+    <dependencies>
+        <dependency org="junit" name="junit" rev="4.12"/>
+        <dependency org="org.testng" name="testng" rev="6.9.10"/>
+        <dependency org="org.webbitserver" name="webbit" rev="0.4.15"/>
+        <dependency org="org.seleniumhq.selenium" name="selenium-java" rev="2.52.0"/>
+        <dependency org="net.jcip" name="jcip-annotations" rev="1.0"/>
+        <dependency org="org.seleniumhq.selenium" name="selenium-server" rev="2.52.0"/>
+        <dependency org="org.apache.poi" name="poi" rev="3.14"/>
+    </dependencies>
+</ivy-module>
