@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class Browser {
 
@@ -29,6 +30,9 @@ public class Browser {
             System.setProperty("webdriver.chrome.driver", "\\\\testmech\\WebAuto\\chromedriver.exe");
 			Driver = new ChromeDriver();
             System.out.println(Driver);
+			break;
+		case "Htmlunit":
+			Driver = new HtmlUnitDriver();
 			break;
 		default:
             System.setProperty("webdriver.ie.driver","\\\\testmech\\WebAuto\\IEDriverServer.exe");
