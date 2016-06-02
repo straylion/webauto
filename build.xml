@@ -13,7 +13,7 @@
         <fileset dir="${lib.dir}">
             <include name="**/*.jar"/>
         </fileset>
-        <fileset dir="../../../../launcher">
+        <fileset dir="launcher">
             <include name="**/*.jar"/>
         </fileset>
         <fileset dir="${ivy.lib.dir}" erroronmissingdir="false">
