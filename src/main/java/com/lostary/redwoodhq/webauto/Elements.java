@@ -54,7 +54,6 @@ public class Elements {
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "UTF-8"));
 			p.load(br);
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
