@@ -1,10 +1,10 @@
 package com.lostary.redwoodhq.webauto;
 
-import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
@@ -52,8 +52,8 @@ public class Elements {
 	public static Properties readProperties(File filePath) {
 		Properties p = new Properties();
 		try {
-			InputStream in = new BufferedInputStream(new FileInputStream(filePath));
-			p.load(in);
+			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "UTF-8"));
+			p.load(br);
 
 		} catch (IOException e) {
 			e.printStackTrace();
