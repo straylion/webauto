@@ -21,13 +21,14 @@ public class Browser {
 
 	public static WebDriver Driver = null;
 	public static String MainWinHandle = null;
+	
 
 	/**
 	 * open browser and get url
 	 * 
 	 * @param params
 	 */
-	public void openBrowser(HashMap<String, String> params) {
+	public Browser(HashMap<String, String> params) {
 		switch (params.get("Browser Type")) {
 		case "Firefox":
 			Driver = new FirefoxDriver();

@@ -30,7 +30,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class Operation {
+public class Operation extends Elements {
 
 	// To click on the 'Cancel' button of the alert.
 	public void cancelAlert(HashMap<String, String> params) {
@@ -60,7 +60,7 @@ public class Operation {
 	 * @param params
 	 */
 	public void clickElement(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		WebDriverWait wait = new WebDriverWait(Browser.Driver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 		element.click();
@@ -74,7 +74,7 @@ public class Operation {
 	 * @param params
 	 */
 	public void clearElement(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		element.clear();
 		System.out.println("Clear element " + params.get("ID"));
 	}
@@ -128,7 +128,7 @@ public class Operation {
 	 * @param params
 	 */
 	public void doubleClick(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		Actions action = new Actions(Browser.Driver);
 		action.doubleClick(element);
 		action.perform();
@@ -142,10 +142,10 @@ public class Operation {
 	public void dragAndDrop(HashMap<String, String> params) {
 		HashMap<String, String> paramsFrom = new HashMap<String, String>();
 		paramsFrom.put("ID", params.get("From ID"));
-		WebElement element = Elements.find(paramsFrom, Browser.Driver);
+		WebElement element = super.find(paramsFrom, Browser.Driver);
 		HashMap<String, String> paramsTo = new HashMap<String, String>();
 		paramsTo.put("ID", params.get("To ID"));
-		WebElement target = Elements.find(paramsTo, Browser.Driver);
+		WebElement target = super.find(paramsTo, Browser.Driver);
 		Actions action = new Actions(Browser.Driver);
 		action.dragAndDrop(element, target);
 		action.build();
@@ -195,7 +195,7 @@ public class Operation {
 	 * @param params
 	 */
 	public void mouseOver(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		Actions action = new Actions(Browser.Driver);
 		action.moveToElement(element).click().perform();
 	}
@@ -221,7 +221,7 @@ public class Operation {
 	 * @param params
 	 */
 	public void rightClick(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		Actions action = new Actions(Browser.Driver);
 		action.contextClick(element).perform();
 	}
@@ -232,7 +232,7 @@ public class Operation {
 	 * @param params
 	 */
 	public void selectItem(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		Select select = new Select(element);
 		if (params.get("Visible Text") != null) {
 			select.selectByVisibleText(params.get("Visible Text"));
@@ -250,7 +250,7 @@ public class Operation {
 	 * @param params
 	 */
 	public void sendKeys(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		String text;
 		switch (params.get("Text Type")) {
 		case "User":
@@ -308,7 +308,7 @@ public class Operation {
 	 * @return
 	 */
 	public void sendCurrentTimeToElement(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		Date date = new Date();
 		DateFormat format = new SimpleDateFormat("MMddhhmmss");
 		String time = format.format(date);
@@ -322,7 +322,7 @@ public class Operation {
 	 * @param params
 	 */
 	public void sendTimetoElement(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 
 		Date date = new Date();
 		Date date0 = new Date(date.getTime() + 30000);
@@ -350,7 +350,7 @@ public class Operation {
 	 * @param params
 	 */
 	public void setFocus(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		if (element.getTagName() == "input") {
 			element.sendKeys("");
 		} else {
@@ -364,7 +364,7 @@ public class Operation {
 	 * @param params
 	 */
 	public void submit(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		element.submit();
 	}
 
@@ -437,7 +437,7 @@ public class Operation {
 	 * @return
 	 */
 	public String getAttributeValue(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		return element.getAttribute(params.get("Attribute Name"));
 	}
 
@@ -461,7 +461,7 @@ public class Operation {
 	 * @return
 	 */
 	public String getCssValue(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		String value = element.getCssValue(params.get("Css Key"));
 		System.out.println("Element " + params.get("ID") + " Css " + params.get("Css Key") + ": " + value);
 		return value;
@@ -484,7 +484,7 @@ public class Operation {
 	 * @return
 	 */
 	public int getElementNo(HashMap<String, String> params) {
-		List<WebElement> elements = Elements.findAll(params, Browser.Driver);
+		List<WebElement> elements = super.findAll(params, Browser.Driver);
 		return elements.size();
 	}
 
@@ -495,7 +495,7 @@ public class Operation {
 	 * @return
 	 */
 	public Point getElementLocation(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		return element.getLocation();
 	}
 
@@ -506,7 +506,7 @@ public class Operation {
 	 * @return
 	 */
 	public Dimension getElementSize(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		return element.getSize();
 	}
 
@@ -516,7 +516,7 @@ public class Operation {
 	 * @return
 	 */
 	public int getElementHeight(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		return element.getSize().getHeight();
 	}
 
@@ -526,7 +526,7 @@ public class Operation {
 	 * @return
 	 */
 	public int getElementWidth(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		return element.getSize().getWidth();
 	}
 
@@ -558,7 +558,7 @@ public class Operation {
 	 * @return
 	 */
 	public String getTagName(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		String tn = element.getTagName();
 		System.out.println("Element " + params.get("ID") + " tag name: " + tn);
 		return tn;
@@ -570,7 +570,7 @@ public class Operation {
 	 * @return
 	 */
 	public String getText(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		String text = element.getText();
 		System.out.println("Element " + params.get("ID") + " text: " + text);
 		return text;
@@ -583,7 +583,7 @@ public class Operation {
 	 * @return
 	 */
 	public String getCouponID(HashMap<String, String> params) {
-		List<WebElement> elements = Elements.findAll(params, Browser.Driver);
+		List<WebElement> elements = super.findAll(params, Browser.Driver);
 		String text = elements.get(0).getText();
 		String couponId = text.split("\\D+")[2];
 		System.out.println("Coupon id: " + couponId);
@@ -626,7 +626,7 @@ public class Operation {
 	public void waitForElement(HashMap<String, String> params) {
 		int count = 10;
 		while (count >= 0) {
-			WebElement element = Elements.find(params, Browser.Driver);
+			WebElement element = super.find(params, Browser.Driver);
 			if (element != null && element.isDisplayed())
 				break;
 			try {

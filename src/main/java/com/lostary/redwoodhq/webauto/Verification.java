@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-public class Verification {
+public class Verification extends Elements {
 
 	/* !----Assert.assertEquals(actual, expected);----! */
 
@@ -16,7 +16,7 @@ public class Verification {
 	 * @param params
 	 */
 	public void attribute(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		String message = " ERROR: Element " + params.get("ID") + " \'s " + params.get("Attribute Name");
 		Assert.assertEquals(element.getAttribute(params.get("Attribute Name")), params.get("Value"), message);
 		System.out.println(
@@ -28,7 +28,7 @@ public class Verification {
 	 * @param params
 	 */
 	public void attributeContain(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		String message = " ERROR: Element " + params.get("ID") + " \'s " + params.get("Attribute Name");
 		Assert.assertTrue(element.getAttribute(params.get("Attribute Name")).contains(params.get("Value")), message);
 		System.out.println("Element " + params.get("ID") + " \'s " + params.get("Attribute Name") + " contains "
@@ -59,7 +59,7 @@ public class Verification {
 	 */
 	public void selectedItem(HashMap<String, String> params) {
 		System.out.println("Except selectedItem is:" + params);
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		WebElement option = new Select(element).getFirstSelectedOption();
 		String selectedLabel = option.getText();
 		String selectedValue = option.getAttribute("value");
@@ -76,7 +76,7 @@ public class Verification {
 	 * @param params
 	 */
 	public void text(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		Assert.assertEquals(element.getText(), params.get("Text"), "ERROR: Element Text: ");
 		System.out.println("Element " + params.get("ID") + "\'s Text is" + params.get("Text"));
 	}
@@ -86,7 +86,7 @@ public class Verification {
 	 * @param params
 	 */
 	public void textContain(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		Assert.assertTrue(element.getText().contains(params.get("Text")), "ERROR: Element Text: ");
 		System.out.println("Element " + params.get("ID") + "\'s Text contains" + params.get("Text"));
 	}
@@ -115,7 +115,7 @@ public class Verification {
 	 * @param params
 	 */
 	public void checkbox(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		Assert.assertEquals(element.isSelected(), params.get("Is Selected").equals("true"), "ERROR: Checkbox: ");
 		System.out.println("Checkbox " + params.get("ID") + " is Selected: " + params.get("Is Selected"));
 	}
@@ -126,7 +126,7 @@ public class Verification {
 	 * @param params
 	 */
 	public void isExisted(HashMap<String, String> params) {
-		List<WebElement> elements = Elements.findAll(params, Browser.Driver);
+		List<WebElement> elements = super.findAll(params, Browser.Driver);
 		String message = "Element " + params.get("ID") + " is NOT existed.";
 		Assert.assertNotEquals(elements.size(), 0, message);
 		System.out.println("Element " + params.get("ID") + " is existed.");
@@ -138,7 +138,7 @@ public class Verification {
 	 * @param params
 	 */
 	public void notExisted(HashMap<String, String> params) {
-		List<WebElement> elements = Elements.findAll(params, Browser.Driver);
+		List<WebElement> elements = super.findAll(params, Browser.Driver);
 		String message = "Element " + params.get("ID") + " is Existed.";
 		Assert.assertEquals(elements.size(), 0, message);
 		System.out.println("Element " + params.get("ID") + " is not existed.");
@@ -149,7 +149,7 @@ public class Verification {
 	 * @param params
 	 */
 	public void exist(HashMap<String, String> params) {
-		List<WebElement> elements = Elements.findAll(params, Browser.Driver);
+		List<WebElement> elements = super.findAll(params, Browser.Driver);
 		String str = params.get("Number of Matches");
 		if (null == str || "".equals(str) || "null".equals(str)) {
 			String message = "Element " + params.get("ID") + " is NOT existed.";
@@ -167,7 +167,7 @@ public class Verification {
 	 * @param params
 	 */
 	public void isEnable(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		Assert.assertEquals(element.isEnabled(), true, "ERROR: Disabled.");
 		System.out.println("Element " + params.get("ID") + " is enabled.");
 	}
@@ -177,7 +177,7 @@ public class Verification {
 	 * @param params
 	 */
 	public void notEnable(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		Assert.assertEquals(element.isEnabled(), false, "ERROR: Enabled");
 		System.out.println("Element " + params.get("ID") + " is disabled.");
 	}
@@ -187,7 +187,7 @@ public class Verification {
 	 * @param params
 	 */
 	public void isVisible(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		Assert.assertEquals(element.isDisplayed(), true, "ERROR: NOT visible.");
 		System.out.println("Element " + params.get("ID") + " is visible.");
 	}
@@ -197,7 +197,7 @@ public class Verification {
 	 * @param params
 	 */
 	public void notVisible(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		Assert.assertEquals(element.isDisplayed(), false, "ERROR: Visible.");
 		System.out.println("Element " + params.get("ID") + " is not visible.");
 	}
@@ -208,7 +208,7 @@ public class Verification {
 	 * @param params
 	 */
 	public void isEditable(HashMap<String, String> params) {
-		WebElement element = Elements.find(params, Browser.Driver);
+		WebElement element = super.find(params, Browser.Driver);
 		Assert.assertEquals(true, element.getAttribute("readonly") == null || element.getAttribute("disabled") == null,
 				"ERROR: NOT Editable!");
 		System.out.println("Element " + params.get("ID") + " is editable.");

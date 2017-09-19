@@ -27,8 +27,8 @@ public class Elements {
 	 * @param Driver
 	 * @return
 	 */
-	public static WebElement find(HashMap<String, String> params, WebDriver Driver) {
-		WebElement foundElement = Driver.findElement(By.xpath(Elements.getP(params.get("ID"))));
+	public WebElement find(HashMap<String, String> params, WebDriver Driver) {
+		WebElement foundElement = Driver.findElement(By.xpath(this.getP(params.get("ID"))));
 		return foundElement;
 	}
 
@@ -38,8 +38,8 @@ public class Elements {
 	 * @param Driver
 	 * @return
 	 */
-	public static List<WebElement> findAll(HashMap<String, String> params, WebDriver Driver) {
-		List<WebElement> foundElements = Driver.findElements(By.xpath(Elements.getP(params.get("ID"))));
+	public List<WebElement> findAll(HashMap<String, String> params, WebDriver Driver) {
+		List<WebElement> foundElements = Driver.findElements(By.xpath(this.getP(params.get("ID"))));
 		return foundElements;
 	}
 
@@ -49,7 +49,7 @@ public class Elements {
 	 * @param filePath
 	 * @return
 	 */
-	public static Properties readProperties(File filePath) {
+	public Properties readProperties(File filePath) {
 		Properties p = new Properties();
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "UTF-8"));
@@ -66,7 +66,7 @@ public class Elements {
 	 * @param param
 	 * @return
 	 */
-	public static String getP(String param) {
+	public String getP(String param) {
 		// String filePath = "./resources/elementpath.properties";
 		File filePath = new File("elementpath.properties");
 		Properties p = readProperties(filePath);
