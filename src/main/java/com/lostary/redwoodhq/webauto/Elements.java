@@ -49,7 +49,7 @@ public class Elements {
 	 * @param filePath
 	 * @return
 	 */
-	public Properties readProperties(File filePath) {
+	private Properties readProperties(File filePath) {
 		Properties p = new Properties();
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "UTF-8"));
@@ -66,7 +66,7 @@ public class Elements {
 	 * @param param
 	 * @return
 	 */
-	public String getP(String param) {
+	private String getP(String param) {
 		// String filePath = "./resources/elementpath.properties";
 		File filePath = new File("elementpath.properties");
 		Properties p = readProperties(filePath);

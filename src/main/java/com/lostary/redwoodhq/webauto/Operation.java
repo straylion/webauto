@@ -660,7 +660,7 @@ public class Operation extends Elements {
 	 * @param InputStream
 	 * @return Map
 	 */
-	public Map<String, String> readExcelContent(InputStream is) {
+	private Map<String, String> readExcelContent(InputStream is) {
 		POIFSFileSystem fs;
 		HSSFWorkbook wb = null;
 		HSSFSheet sheet;
