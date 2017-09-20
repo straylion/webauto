@@ -18,9 +18,13 @@ public class Test01 {
 		param0.put("Browser Type", "Chrome");
 		
 		param1.put("ID", "searchbtn");
+		param1.put("Attribute Name", "id");
+		param1.put("Value", "su");
 		
-		Browser br = new Browser(param0);
+		new Browser(param0);
 		Operation op = new Operation();
+		Verification ve = new Verification();
 		op.clickElement(param1);
+		ve.attribute(param1);
 	}
 }
