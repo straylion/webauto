@@ -20,6 +20,8 @@ import org.openqa.selenium.WebDriver;
  *
  */
 public class Elements {
+	
+	WebDriver webDriver = Browser.Driver;
 
 	/**
 	 * 
@@ -27,8 +29,8 @@ public class Elements {
 	 * @param Driver
 	 * @return
 	 */
-	public WebElement find(HashMap<String, String> params, WebDriver Driver) {
-		WebElement foundElement = Driver.findElement(By.xpath(this.getP(params.get("ID"))));
+	public WebElement find(HashMap<String, String> params) {
+		WebElement foundElement = webDriver.findElement(By.xpath(this.getP(params.get("ID"))));
 		return foundElement;
 	}
 
@@ -38,8 +40,8 @@ public class Elements {
 	 * @param Driver
 	 * @return
 	 */
-	public List<WebElement> findAll(HashMap<String, String> params, WebDriver Driver) {
-		List<WebElement> foundElements = Driver.findElements(By.xpath(this.getP(params.get("ID"))));
+	public List<WebElement> findAll(HashMap<String, String> params) {
+		List<WebElement> foundElements = webDriver.findElements(By.xpath(this.getP(params.get("ID"))));
 		return foundElements;
 	}
 

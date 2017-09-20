@@ -24,7 +24,6 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
@@ -32,33 +31,27 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class Operation extends Elements {
-	
-	WebDriver dr;
-	
-	Operation() {
-		this.dr = Browser.Driver;
-	}
 
 	// To click on the 'Cancel' button of the alert.
 	public void cancelAlert(HashMap<String, String> params) {
-		dr.switchTo().alert().dismiss();
+		webDriver.switchTo().alert().dismiss();
 		sleep();
 	}
 
 	// To click on the 'OK' button of the alert.
 	public void acceptAlert(HashMap<String, String> params) {
-		dr.switchTo().alert().accept();
+		webDriver.switchTo().alert().accept();
 		sleep();
 	}
 
 	// To capture the alert message.
 	public void getTextFromAlert(HashMap<String, String> params) {
-		dr.switchTo().alert().getText();
+		webDriver.switchTo().alert().getText();
 	}
 
 	// To send some data to alert box.
 	public void sendKeysToAlert(HashMap<String, String> params) {
-		dr.switchTo().alert().sendKeys(params.get("Text"));
+		webDriver.switchTo().alert().sendKeys(params.get("Text"));
 	}
 
 	/**
@@ -67,8 +60,8 @@ public class Operation extends Elements {
 	 * @param params
 	 */
 	public void clickElement(HashMap<String, String> params) {
-		WebElement element = super.find(params, dr);
-		WebDriverWait wait = new WebDriverWait(dr, 20);
+		WebElement element = super.find(params);
+		WebDriverWait wait = new WebDriverWait(webDriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 		element.click();
 		sleep();
@@ -81,7 +74,7 @@ public class Operation extends Elements {
 	 * @param params
 	 */
 	public void clearElement(HashMap<String, String> params) {
-		WebElement element = super.find(params, dr);
+		WebElement element = super.find(params);
 		element.clear();
 		System.out.println("Clear element " + params.get("ID"));
 	}
@@ -92,9 +85,9 @@ public class Operation extends Elements {
 	 * @param parmas
 	 */
 	public void closeAllBrowser(Object parmas) {
-		if (dr != null)
+		if (webDriver != null)
 			try {
-				dr.quit();
+				webDriver.quit();
 			} catch (Exception anException) {
 				System.out.println("Closed All Browser and Killed task");
 			}
@@ -106,8 +99,8 @@ public class Operation extends Elements {
 	 * @param parmas
 	 */
 	public void closeCurrentWindow(Object parmas) {
-		if (dr != null)
-			dr.close();
+		if (webDriver != null)
+			webDriver.close();
 	}
 
 	/**
@@ -118,14 +111,14 @@ public class Operation extends Elements {
 	public void deleteCookie(HashMap<String, String> params) {
 		if (params.get("Cookie Name").equals("ALL")) {
 			System.out.println("Cookie Name == ALL");
-			System.out.println("Before Cookies:" + dr.manage().getCookies());
-			dr.manage().deleteAllCookies();
-			System.out.println("After Cookies:" + dr.manage().getCookies());
+			System.out.println("Before Cookies:" + webDriver.manage().getCookies());
+			webDriver.manage().deleteAllCookies();
+			System.out.println("After Cookies:" + webDriver.manage().getCookies());
 		} else {
 			System.out.println("Other Cookie Name == " + params.get("Cookie Name"));
-			System.out.println("Before Cookies:" + dr.manage().getCookies());
-			dr.manage().deleteCookieNamed(params.get("Cookie Name"));
-			System.out.println("After Cookies:" + dr.manage().getCookies());
+			System.out.println("Before Cookies:" + webDriver.manage().getCookies());
+			webDriver.manage().deleteCookieNamed(params.get("Cookie Name"));
+			System.out.println("After Cookies:" + webDriver.manage().getCookies());
 		}
 	}
 
@@ -135,8 +128,8 @@ public class Operation extends Elements {
 	 * @param params
 	 */
 	public void doubleClick(HashMap<String, String> params) {
-		WebElement element = super.find(params, dr);
-		Actions action = new Actions(dr);
+		WebElement element = super.find(params);
+		Actions action = new Actions(webDriver);
 		action.doubleClick(element);
 		action.perform();
 	}
@@ -149,11 +142,11 @@ public class Operation extends Elements {
 	public void dragAndDrop(HashMap<String, String> params) {
 		HashMap<String, String> paramsFrom = new HashMap<String, String>();
 		paramsFrom.put("ID", params.get("From ID"));
-		WebElement element = super.find(paramsFrom, dr);
+		WebElement element = super.find(paramsFrom);
 		HashMap<String, String> paramsTo = new HashMap<String, String>();
 		paramsTo.put("ID", params.get("To ID"));
-		WebElement target = super.find(paramsTo, dr);
-		Actions action = new Actions(dr);
+		WebElement target = super.find(paramsTo);
+		Actions action = new Actions(webDriver);
 		action.dragAndDrop(element, target);
 		action.build();
 		action.perform();
@@ -165,7 +158,7 @@ public class Operation extends Elements {
 	 * @param params
 	 */
 	public void executeJS(HashMap<String, String> params) {
-		JavascriptExecutor js = (JavascriptExecutor) dr;
+		JavascriptExecutor js = (JavascriptExecutor) webDriver;
 		js.executeScript(params.get("Code"));
 	}
 
@@ -174,7 +167,7 @@ public class Operation extends Elements {
 	 * @param params
 	 */
 	public void goBack(HashMap<String, String> params) {
-		dr.navigate().back();
+		webDriver.navigate().back();
 		sleep();
 	}
 
@@ -183,7 +176,7 @@ public class Operation extends Elements {
 	 * @param params
 	 */
 	public void goForward(HashMap<String, String> params) {
-		dr.navigate().forward();
+		webDriver.navigate().forward();
 		sleep();
 	}
 
@@ -192,7 +185,7 @@ public class Operation extends Elements {
 	 * @param params
 	 */
 	public void Refresh(HashMap<String, String> params) {
-		dr.navigate().refresh();
+		webDriver.navigate().refresh();
 		sleep();
 	}
 
@@ -202,8 +195,8 @@ public class Operation extends Elements {
 	 * @param params
 	 */
 	public void mouseOver(HashMap<String, String> params) {
-		WebElement element = super.find(params, dr);
-		Actions action = new Actions(dr);
+		WebElement element = super.find(params);
+		Actions action = new Actions(webDriver);
 		action.moveToElement(element).click().perform();
 	}
 
@@ -215,10 +208,10 @@ public class Operation extends Elements {
 		if (params.get("URL") != null) {
 			if ((params.get("URL")).startsWith("http://") || (params.get("URL")).startsWith("https://")) {
 				System.out.println("Navigate to: " + params.get("URL"));
-				dr.navigate().to(params.get("URL"));
+				webDriver.navigate().to(params.get("URL"));
 			} else {
 				System.out.println("Navigate to: " + params.get("URL"));
-				dr.navigate().to("http://" + params.get("URL"));
+				webDriver.navigate().to("http://" + params.get("URL"));
 			}
 		}
 	}
@@ -228,8 +221,8 @@ public class Operation extends Elements {
 	 * @param params
 	 */
 	public void rightClick(HashMap<String, String> params) {
-		WebElement element = super.find(params, dr);
-		Actions action = new Actions(dr);
+		WebElement element = super.find(params);
+		Actions action = new Actions(webDriver);
 		action.contextClick(element).perform();
 	}
 
@@ -239,7 +232,7 @@ public class Operation extends Elements {
 	 * @param params
 	 */
 	public void selectItem(HashMap<String, String> params) {
-		WebElement element = super.find(params, dr);
+		WebElement element = super.find(params);
 		Select select = new Select(element);
 		if (params.get("Visible Text") != null) {
 			select.selectByVisibleText(params.get("Visible Text"));
@@ -257,7 +250,7 @@ public class Operation extends Elements {
 	 * @param params
 	 */
 	public void sendKeys(HashMap<String, String> params) {
-		WebElement element = super.find(params, dr);
+		WebElement element = super.find(params);
 		String text;
 		switch (params.get("Text Type")) {
 		case "User":
@@ -315,7 +308,7 @@ public class Operation extends Elements {
 	 * @return
 	 */
 	public void sendCurrentTimeToElement(HashMap<String, String> params) {
-		WebElement element = super.find(params, dr);
+		WebElement element = super.find(params);
 		Date date = new Date();
 		DateFormat format = new SimpleDateFormat("MMddhhmmss");
 		String time = format.format(date);
@@ -329,7 +322,7 @@ public class Operation extends Elements {
 	 * @param params
 	 */
 	public void sendTimetoElement(HashMap<String, String> params) {
-		WebElement element = super.find(params, dr);
+		WebElement element = super.find(params);
 
 		Date date = new Date();
 		Date date0 = new Date(date.getTime() + 30000);
@@ -338,13 +331,13 @@ public class Operation extends Elements {
 
 		if (params.get("Type").equals("Start")) {
 			String time0 = format.format(date0);
-			JavascriptExecutor js = (JavascriptExecutor) dr;
+			JavascriptExecutor js = (JavascriptExecutor) webDriver;
 			js.executeScript("arguments[0].value=\"" + time0 + "\"", element);
 			element.click();
 			System.out.println("Send time " + time0 + " to " + params.get("ID"));
 		} else {
 			String time1 = format.format(date1);
-			JavascriptExecutor js = (JavascriptExecutor) dr;
+			JavascriptExecutor js = (JavascriptExecutor) webDriver;
 			js.executeScript("arguments[0].value=\"" + time1 + "\"", element);
 			element.click();
 			System.out.println("Send time " + time1 + " to " + params.get("ID"));
@@ -357,11 +350,11 @@ public class Operation extends Elements {
 	 * @param params
 	 */
 	public void setFocus(HashMap<String, String> params) {
-		WebElement element = super.find(params, dr);
+		WebElement element = super.find(params);
 		if (element.getTagName() == "input") {
 			element.sendKeys("");
 		} else {
-			new Actions(dr).moveToElement(element).perform();
+			new Actions(webDriver).moveToElement(element).perform();
 		}
 	}
 
@@ -371,7 +364,7 @@ public class Operation extends Elements {
 	 * @param params
 	 */
 	public void submit(HashMap<String, String> params) {
-		WebElement element = super.find(params, dr);
+		WebElement element = super.find(params);
 		element.submit();
 	}
 
@@ -382,11 +375,11 @@ public class Operation extends Elements {
 	 */
 	public void switchToNewWindow(HashMap<String, String> params) {
 		sleep();
-		Set<String> winHandels = dr.getWindowHandles();
+		Set<String> winHandels = webDriver.getWindowHandles();
 		List<String> it = new ArrayList<String>(winHandels);
 		// int index=Integer.parseInt(params.get("Window Index"));
 		System.out.println(it + ",switchTo:" + it.get(it.size() - 1));
-		dr.switchTo().window(it.get(it.size() - 1));
+		webDriver.switchTo().window(it.get(it.size() - 1));
 	}
 
 	/**
@@ -397,13 +390,13 @@ public class Operation extends Elements {
 	public void switchToWindow(HashMap<String, String> params) {
 		int iTimeout = 20;
 		if (params.get("Window Name") == "Default Window") {
-			dr.switchTo().window(Browser.MainWinHandle);
+			webDriver.switchTo().window(Browser.MainWinHandle);
 			return;
 		}
 		while (iTimeout > 0) {
-			for (String handle : dr.getWindowHandles()) {
-				dr.switchTo().window(handle);
-				if (dr.getTitle().equals(params.get("Window Name"))) {
+			for (String handle : webDriver.getWindowHandles()) {
+				webDriver.switchTo().window(handle);
+				if (webDriver.getTitle().equals(params.get("Window Name"))) {
 					return;
 				}
 			}
@@ -424,7 +417,7 @@ public class Operation extends Elements {
 	 * @param params
 	 */
 	public void switchToFrame(HashMap<String, String> params) {
-		dr.switchTo().frame(params.get("ID or Name"));
+		webDriver.switchTo().frame(params.get("ID or Name"));
 	}
 
 	/**
@@ -432,7 +425,7 @@ public class Operation extends Elements {
 	 * @param params
 	 */
 	public void switchToDefaultContent(HashMap<String, String> params) {
-		dr.switchTo().defaultContent();
+		webDriver.switchTo().defaultContent();
 	}
 
 	/* !----GET----! */
@@ -444,17 +437,17 @@ public class Operation extends Elements {
 	 * @return
 	 */
 	public String getAttributeValue(HashMap<String, String> params) {
-		WebElement element = super.find(params, dr);
+		WebElement element = super.find(params);
 		return element.getAttribute(params.get("Attribute Name"));
 	}
 
 	public String getCookieValue(HashMap<String, String> params) {
 		if (params.get("Cookie Name").equals("ALL")) { // all cookies
-			String cookie = dr.manage().getCookies().toString();
+			String cookie = webDriver.manage().getCookies().toString();
 			System.out.println("All cookies: " + cookie);
 			return cookie;
 		} else { // single cookie
-			Cookie cookie = dr.manage().getCookieNamed(params.get("Cookie Name"));
+			Cookie cookie = webDriver.manage().getCookieNamed(params.get("Cookie Name"));
 			assert cookie != null : "Error: cookie not found";
 			System.out.println("Cookie " + params.get("Cookie Name") + " value: " + cookie.getValue());
 			return cookie.getValue();
@@ -468,7 +461,7 @@ public class Operation extends Elements {
 	 * @return
 	 */
 	public String getCssValue(HashMap<String, String> params) {
-		WebElement element = super.find(params, dr);
+		WebElement element = super.find(params);
 		String value = element.getCssValue(params.get("Css Key"));
 		System.out.println("Element " + params.get("ID") + " Css " + params.get("Css Key") + ": " + value);
 		return value;
@@ -480,7 +473,7 @@ public class Operation extends Elements {
 	 * @return
 	 */
 	public String getUrl(HashMap<String, String> params) {
-		String url = dr.getCurrentUrl();
+		String url = webDriver.getCurrentUrl();
 		System.out.println("Current Url is: " + url);
 		return url;
 	}
@@ -491,7 +484,7 @@ public class Operation extends Elements {
 	 * @return
 	 */
 	public int getElementNo(HashMap<String, String> params) {
-		List<WebElement> elements = super.findAll(params, dr);
+		List<WebElement> elements = super.findAll(params);
 		return elements.size();
 	}
 
@@ -502,7 +495,7 @@ public class Operation extends Elements {
 	 * @return
 	 */
 	public Point getElementLocation(HashMap<String, String> params) {
-		WebElement element = super.find(params, dr);
+		WebElement element = super.find(params);
 		return element.getLocation();
 	}
 
@@ -513,7 +506,7 @@ public class Operation extends Elements {
 	 * @return
 	 */
 	public Dimension getElementSize(HashMap<String, String> params) {
-		WebElement element = super.find(params, dr);
+		WebElement element = super.find(params);
 		return element.getSize();
 	}
 
@@ -523,7 +516,7 @@ public class Operation extends Elements {
 	 * @return
 	 */
 	public int getElementHeight(HashMap<String, String> params) {
-		WebElement element = super.find(params, dr);
+		WebElement element = super.find(params);
 		return element.getSize().getHeight();
 	}
 
@@ -533,7 +526,7 @@ public class Operation extends Elements {
 	 * @return
 	 */
 	public int getElementWidth(HashMap<String, String> params) {
-		WebElement element = super.find(params, dr);
+		WebElement element = super.find(params);
 		return element.getSize().getWidth();
 	}
 
@@ -543,7 +536,7 @@ public class Operation extends Elements {
 	 * @return
 	 */
 	public String getPageSource(HashMap<String, String> params) {
-		String ps = dr.getPageSource();
+		String ps = webDriver.getPageSource();
 		System.out.println("Page Source is: " + ps);
 		return ps;
 	}
@@ -554,7 +547,7 @@ public class Operation extends Elements {
 	 * @return
 	 */
 	public String getPageTitle(HashMap<String, String> params) {
-		String pt = dr.getTitle();
+		String pt = webDriver.getTitle();
 		System.out.println("Page Title is: " + pt);
 		return pt;
 	}
@@ -565,7 +558,7 @@ public class Operation extends Elements {
 	 * @return
 	 */
 	public String getTagName(HashMap<String, String> params) {
-		WebElement element = super.find(params, dr);
+		WebElement element = super.find(params);
 		String tn = element.getTagName();
 		System.out.println("Element " + params.get("ID") + " tag name: " + tn);
 		return tn;
@@ -577,7 +570,7 @@ public class Operation extends Elements {
 	 * @return
 	 */
 	public String getText(HashMap<String, String> params) {
-		WebElement element = super.find(params, dr);
+		WebElement element = super.find(params);
 		String text = element.getText();
 		System.out.println("Element " + params.get("ID") + " text: " + text);
 		return text;
@@ -590,7 +583,7 @@ public class Operation extends Elements {
 	 * @return
 	 */
 	public String getCouponID(HashMap<String, String> params) {
-		List<WebElement> elements = super.findAll(params, dr);
+		List<WebElement> elements = super.findAll(params);
 		String text = elements.get(0).getText();
 		String couponId = text.split("\\D+")[2];
 		System.out.println("Coupon id: " + couponId);
@@ -603,7 +596,7 @@ public class Operation extends Elements {
 	 * @return
 	 */
 	public String getWindowHandle(HashMap<String, String> params) {
-		String wh = dr.getWindowHandle();
+		String wh = webDriver.getWindowHandle();
 		System.out.println("Window handle: " + wh);
 		return wh;
 	}
@@ -633,7 +626,7 @@ public class Operation extends Elements {
 	public void waitForElement(HashMap<String, String> params) {
 		int count = 10;
 		while (count >= 0) {
-			WebElement element = super.find(params, dr);
+			WebElement element = super.find(params);
 			if (element != null && element.isDisplayed())
 				break;
 			try {
