@@ -35,7 +35,7 @@ public class Browser {
 			break;
 		case "Chrome":
 			ChromeDriverService service = new ChromeDriverService.Builder().usingPort(9518)
-					.usingDriverExecutable(new File("chromedriver.exe")).build();
+					.usingDriverExecutable(new File("chromedriver")).build();
 			try {
 				service.start();
 			} catch (IOException e) {
